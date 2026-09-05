@@ -329,6 +329,7 @@ func (p *ProcessCommand) run() {
 					cmdCancel = res.cancel
 					fn := res.handlerFn
 					p.handler.Store(&fn)
+					p.lastUse.Store(time.Now().UnixNano())
 					setState(StateReady)
 					notifyWaiters(nil)
 					if req.block {
